@@ -5,7 +5,7 @@ import { CalendarList } from 'react-native-calendars';
 export default class CalendarsList extends Component {
 
   static navigationOptions = {
-    title: 'Calendars List',
+    title: 'Calendar List',
   };
 
   render() {
