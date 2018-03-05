@@ -1,21 +1,34 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { Component } from 'react';
+import { StackNavigator } from 'react-navigation';
+import MenuScreen from './src/screens/menu';
+import AgendaScreen from './src/screens/agenda';
+import CalendarsScreen from './src/screens/calendars';
+import CalendarsListScreen from './src/screens/calendarsList';
 
-export default class App extends React.Component {
+export default class App extends Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-      </View>
+      <RootStack />
     );
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+const RootStack = StackNavigator(
+  {
+    Menu: {
+      screen: MenuScreen,
+    },
+    Agenda: {
+      screen: AgendaScreen,
+    },
+    Calendars: {
+      screen: CalendarsScreen,
+    },
+    CalendarsList: {
+      screen: CalendarsListScreen,
+    },
   },
-});
+  {
+    initialRouteName: 'Menu',
+  }
+);

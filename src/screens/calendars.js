@@ -1,17 +1,28 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
   Text,
   StyleSheet,
   ScrollView,
   View
 } from 'react-native';
-import {Calendar} from 'react-native-calendars';
+import { Calendar } from 'react-native-calendars';
 
 export default class CalendarsScreen extends Component {
+
+  static navigationOptions = {
+    title: 'Calendars',
+  };
+
   constructor(props) {
     super(props);
     this.state = {};
     this.onDayPress = this.onDayPress.bind(this);
+  }
+
+  onDayPress(day) {
+    this.setState({
+      selected: day.dateString
+    });
   }
 
   render() {
@@ -22,37 +33,52 @@ export default class CalendarsScreen extends Component {
           onDayPress={this.onDayPress}
           style={styles.calendar}
           hideExtraDays
-          markedDates={{[this.state.selected]: {selected: true, disableTouchEvent: true, selectedColor: 'orange'}}}
+          markedDates={{ [this.state.selected]: { 
+            selected: true,
+            disableTouchEvent: true, 
+            selectedColor: 'orange' 
+          } }}
         />
         <Text style={styles.text}>Calendar with marked dates and hidden arrows</Text>
         <Calendar
           style={styles.calendar}
-          current={'2012-05-16'}
-          minDate={'2012-05-10'}
-          maxDate={'2012-05-29'}
+          current={'2018-02-16'}
+          minDate={'2018-02-10'}
+          maxDate={'2018-02-29'}
           firstDay={1}
           markedDates={{
-            '2012-05-23': {selected: true, marked: true},
-            '2012-05-24': {selected: true, marked: true, dotColor: 'green'},
-            '2012-05-25': {marked: true, dotColor: 'red'},
-            '2012-05-26': {marked: true},
-            '2012-05-27': {disabled: true, activeOpacity: 0}
+            '2018-02-23': { selected: true, marked: true },
+            '2018-02-24': { selected: true, marked: true, dotColor: 'green' },
+            '2018-02-25': { marked: true, dotColor: 'red' },
+            '2018-02-26': { marked: true },
+            '2018-02-27': { disabled: true, activeOpacity: 0 }
           }}
           // disabledByDefault={true}
-          hideArrows={true}
+          hideArrows
         />
         <Text style={styles.text}>Calendar with custom day component</Text>
         <Calendar
-          style={[styles.calendar, {height: 300}]}
-          dayComponent={({date, state}) => {
-            return (<View style={{flex: 1}}><Text style={{textAlign: 'center', color: state === 'disabled' ? 'gray' : 'black'}}>{date.day}</Text></View>);
+          style={[styles.calendar, { height: 300 }]}
+          dayComponent={({ date, state }) => {
+            return (
+              <View style={{ flex: 1 }}>
+                <Text 
+                  style={{ 
+                    textAlign: 'center', 
+                    color: state === 'disabled' ? 'gray' : 'black' 
+                  }}
+                >
+                  {date.day}
+                </Text>
+              </View>
+            );
           }}
         />
         <Text style={styles.text}>Calendar with period marking and spinner</Text>
         <Calendar
           style={styles.calendar}
-          current={'2012-05-16'}
-          minDate={'2012-05-10'}
+          current={'2018-02-16'}
+          minDate={'2018-02-10'}
           displayLoadingIndicator
           markingType={'period'}
           theme={{
@@ -74,25 +100,36 @@ export default class CalendarsScreen extends Component {
             }
           }}
           markedDates={{
-            '2012-05-17': {disabled: true},
-            '2012-05-08': {textColor: '#666'},
-            '2012-05-09': {textColor: '#666'},
-            '2012-05-14': {startingDay: true, color: 'blue', endingDay: true},
-            '2012-05-21': {startingDay: true, color: 'blue'},
-            '2012-05-22': {endingDay: true, color: 'gray'},
-            '2012-05-24': {startingDay: true, color: 'gray'},
-            '2012-05-25': {color: 'gray'},
-            '2012-05-26': {endingDay: true, color: 'gray'}}}
+            '2018-02-17': { disabled: true },
+            '2018-02-08': { textColor: '#666' },
+            '2018-02-09': { textColor: '#666' },
+            '2018-02-14': { startingDay: true, color: 'blue', endingDay: true },
+            '2018-02-21': { startingDay: true, color: 'blue' },
+            '2018-02-22': { endingDay: true, color: 'gray' },
+            '2018-02-24': { startingDay: true, color: 'gray' },
+            '2018-02-25': { color: 'gray' },
+            '2018-02-26': { endingDay: true, color: 'gray' } }}
           hideArrows={false}
         />
         <Text style={styles.text}>Calendar with multi-dot marking</Text>
         <Calendar
           style={styles.calendar}
-          current={'2012-05-16'}
+          current={'2018-02-16'}
           markingType={'multi-dot'}
           markedDates={{
-            '2012-05-08': {dots: [{key: 'vacation', color: 'blue', selectedDotColor: 'white'}, {key: 'massage', color: 'red', selectedDotColor: 'white'}], selected: true},
-            '2012-05-09': {dots: [{key: 'vacation', color: 'blue', selectedColor: 'red'}, {key: 'massage', color: 'red', selectedColor: 'blue'}], disabled: true}
+            '2018-02-08': { 
+              dots: [
+                { key: 'vacation', color: 'blue', selectedDotColor: 'white' },
+                { key: 'massage', color: 'red', selectedDotColor: 'white' }
+              ],
+              selected: true 
+            },
+            '2018-02-09': {
+              dots: [
+                { key: 'vacation', color: 'blue', selectedColor: 'red' },
+                { key: 'massage', color: 'red', selectedColor: 'blue' }],
+              disabled: true 
+            }
           }}
           hideArrows={false}
         />
@@ -102,16 +139,10 @@ export default class CalendarsScreen extends Component {
           style={styles.calendar}
           hideExtraDays
           showWeekNumbers
-          markedDates={{[this.state.selected]: {selected: true}}}
+          markedDates={{ [this.state.selected]: { selected: true } }}
         />
       </ScrollView>
     );
-  }
-
-  onDayPress(day) {
-    this.setState({
-      selected: day.dateString
-    });
   }
 }
 
