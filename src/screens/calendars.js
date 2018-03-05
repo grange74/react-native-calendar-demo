@@ -53,7 +53,6 @@ export default class CalendarsScreen extends Component {
             '2018-02-26': { marked: true },
             '2018-02-27': { disabled: true, activeOpacity: 0 }
           }}
-          // disabledByDefault={true}
           hideArrows
         />
         <Text style={styles.text}>Calendar with custom day component</Text>
@@ -90,7 +89,6 @@ export default class CalendarsScreen extends Component {
             monthTextColor: 'white',
             selectedDayBackgroundColor: '#333248',
             arrowColor: 'white',
-            // textDisabledColor: 'red',
             'stylesheet.calendar.header': {
               week: {
                 marginTop: 5,
